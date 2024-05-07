@@ -1,5 +1,6 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template, request
 app = Flask(__name__,template_folder='templates',static_url_path='/static',static_folder='static')
+name = ''
 @app.route('/')
 @app.route('/index',methods=['GET'])
 def index():
@@ -15,8 +16,24 @@ def tickets():
 def welfare():
     return render_template('welfare.html')
 @app.route('/user/<name>')
-def user(name):
-    return render_template('user.html',name=name)
+def user(username):
+    global name
+    name = username
+    return render_template('user.html',name=username)
+@app.route('/search',methods=['POST'])
+def search():
+    global name
+    username = name
+    keyword = request.form['keyword']
+    if keyword=='red':
+        message = 'is red'
+    elif keyword == 'yellow':
+        message = 'is yellow'
+    elif keyword == 'green':
+        message = 'is green'
+    else:
+        message = 'not found'
+    return render_template('user.html',name=username,message=message)
 
 if __name__ =='__main__':
     app.run()
