@@ -24,7 +24,7 @@ def user(username):
 def search():
     global name
     username = name
-    if request.method == 'GET':
+    if request.method != 'POST':
         message = 'please use post method'
         return render_template('result.html', message=message)
     keyword = request.form['keyword']
