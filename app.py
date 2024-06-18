@@ -15,7 +15,7 @@ def tickets():
 @app.route('/welfare')
 def welfare():
     return render_template('welfare.html')
-@app.route('/user/<name>')
+@app.route('/user/<username>')
 def user(username):
     global name
     name = username
