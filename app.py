@@ -20,10 +20,13 @@ def user(username):
     global name
     name = username
     return render_template('user.html',name=username)
-@app.route('/search',methods=['POST'])
+@app.route('/search',methods=['GET','POST'])
 def search():
     global name
     username = name
+    if request.method == 'GET':
+        message = 'please use post method'
+        return render_template('result.html', message=message)
     keyword = request.form['keyword']
     if keyword=='red':
         message = 'is red'
