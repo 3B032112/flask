@@ -24,10 +24,7 @@ def user(username):
 def search():
     global name
     username = name
-    if request.method != 'POST':
-        message = 'please use post method'
-        return render_template('result.html', message=message)
-    else:
+    if request.method == 'POST':
         keyword = request.form['keyword']
         if keyword=='red':
             message = 'is red'
@@ -38,6 +35,8 @@ def search():
         else:
             message = 'not found'
         return render_template('user.html',name=username,message=message)
-
+    else:
+        message = 'please use post method'
+        return render_template('result.html', message=message)
 if __name__ =='__main__':
     app.run()
