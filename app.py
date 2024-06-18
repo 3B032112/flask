@@ -27,16 +27,17 @@ def search():
     if request.method != 'POST':
         message = 'please use post method'
         return render_template('result.html', message=message)
-    keyword = request.form['keyword']
-    if keyword=='red':
-        message = 'is red'
-    elif keyword == 'yellow':
-        message = 'is yellow'
-    elif keyword == 'green':
-        message = 'is green'
     else:
-        message = 'not found'
-    return render_template('user.html',name=username,message=message)
+        keyword = request.form['keyword']
+        if keyword=='red':
+            message = 'is red'
+        elif keyword == 'yellow':
+            message = 'is yellow'
+        elif keyword == 'green':
+            message = 'is green'
+        else:
+            message = 'not found'
+        return render_template('user.html',name=username,message=message)
 
 if __name__ =='__main__':
     app.run()
